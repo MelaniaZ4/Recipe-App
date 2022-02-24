@@ -1,8 +1,17 @@
 <div class="row">
     <div class="col-md-5">
-        <app-recipe-list></app-recipe-list>
+        <!-- Listen to custom-event: 'recipeWasSelected' and store selected recipe in property: 'selectedRecipe' -->
+        <app-recipe-list (recipeWasSelected)="selectedRecipe = $event"></app-recipe-list> 
     </div>
     <div class="col-md-7">
-        <app-recipe-detail></app-recipe-detail>
+        <!-- If no recipe was selected: show info text 
+        (recipe) property defined in recipe-detail.ts-->
+        <app-recipe-detail
+        *ngIf="selectedRecipe; else infoText"
+        [recipe]="selectedRecipe"></app-recipe-detail>
+        <!-- local reference for if-else-statement. -->
+        <ng-template #infoText> 
+            <p>Please select a recipe</p>
+        </ng-template>
     </div>
 </div>

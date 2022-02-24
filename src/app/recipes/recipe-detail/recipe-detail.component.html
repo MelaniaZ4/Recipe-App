@@ -1,11 +1,17 @@
 <div class="row">
     <div class="col xs 12">
-        <img src="" alt="" class="img-responsive">
+        <!-- Use property binding to display image [src] and string interpolation for recipe.name -->
+        <img 
+        [src]="recipe.imagePath" 
+        alt="{{ recipe.name }}" 
+        class="img-responsive"
+        style="max-height: 300px;">
     </div>
 </div>
 <div class="row">
     <div class="col xs 12">
-        <h1>Recipe Name</h1>
+        <!-- Show name of recipe by string interpollation and the property defined in .ts -->
+        <h1>{{ recipe.name }}</h1>
     </div>
 </div>
 <div class="row">
@@ -26,7 +32,7 @@
 </div>
 <div class="row">
     <div class="col-xs-12">
-        Description
+        {{ recipe.description }}
     </div>
 </div>
 <div class="row">
