@@ -5,8 +5,9 @@
       <h2>
         <!-- after click event, if-statement determines which navigation 
           feature is displayed using *ngIf -->
-        <app-recipes *ngIf="loadedFeature === 'recipe'"></app-recipes> 
-        <app-shopping-list *ngIf="loadedFeature !== 'recipe'"></app-shopping-list>
+        <!-- <app-recipes *ngIf="loadedFeature === 'recipe'"></app-recipes> 
+        <app-shopping-list *ngIf="loadedFeature !== 'recipe'"></app-shopping-list> -->
+        <router-outlet></router-outlet>
       </h2>
     </div>
   </div>
