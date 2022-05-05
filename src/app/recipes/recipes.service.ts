@@ -38,6 +38,10 @@ getRecipes(){
     return this.recipes.slice();  //.slice returns a copy of the recipes array rather than the actual array
 }
 
+getRecipe(id: number) {
+    return this.recipes[id];
+}
+
 addIngredientsToShoppingList(ingredients: Ingredient[]) {
     this.shoppingListService.addIngredients(ingredients);
 }
