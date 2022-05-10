@@ -1,27 +1,28 @@
 import { Subject } from 'rxjs';
-import { Ingredient } from "../shared/ingredient.model";
 
-export class ShoppinglistService {
-    ingredientsChanged = new Subject<Ingredient[]>(); //passes on array of ingredients to inform other components
-    private ingredients: Ingredient[] = [
-    new Ingredient ('Apples' , 5),
-    new Ingredient ('Tomatoes', 10),
-    ];
+import { Ingredient } from '../shared/ingredient.model';
 
-    getIngredients() {
-        return this.ingredients.slice(); //access copy of ingredients list
-        this.ingredientsChanged.next(this.ingredients.slice()); //emiting the event ingredientsChanged
-    }
-    addIngredient (ingredient: Ingredient) {//Method from shoppinglist component
-        this.ingredients.push(ingredient);
-    }
+export class ShoppingListService {
+  ingredientsChanged = new Subject<Ingredient[]>();
+  private ingredients: Ingredient[] = [
+    new Ingredient('Apples', 5),
+    new Ingredient('Tomatoes', 10),
+  ];
 
-    addIngredients (ingredients: Ingredient[]) {
-        // for (let ingredient of ingredients) {
-        //     this.addIngredient(ingredient);
-        // }  // viable option but might cause issues with too many ingredients
-        this.ingredients.push(...ingredients); //spread ES6 element ... it spread array into list of single ingredients
-        this.ingredientsChanged.next(this.ingredients.slice());
-    }
+  getIngredients() {
+    return this.ingredients.slice();
+  }
 
+  addIngredient(ingredient: Ingredient) {
+    this.ingredients.push(ingredient);
+    this.ingredientsChanged.next(this.ingredients.slice());
+  }
+
+  addIngredients(ingredients: Ingredient[]) {
+    // for (let ingredient of ingredients) {
+    //   this.addIngredient(ingredient);
+    // }
+    this.ingredients.push(...ingredients);
+    this.ingredientsChanged.next(this.ingredients.slice());
+  }
 }

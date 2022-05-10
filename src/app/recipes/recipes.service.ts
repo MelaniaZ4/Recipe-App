@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Ingredient } from "../shared/ingredient.model";
-import { ShoppinglistService } from "../shopping-list/shoppinglist.service";
+import { ShoppingListService } from "../shopping-list/shoppinglist.service";
 import { Recipe } from "./recipe.model";
 
 @Injectable()
@@ -31,7 +31,7 @@ export class RecipeService {
 
 ];
 
-constructor(private shoppingListService: ShoppinglistService){}
+constructor(private shoppingListService: ShoppingListService){}
 
 getRecipes(){
     return this.recipes.slice();  //.slice returns a copy of the recipes array rather than the actual array

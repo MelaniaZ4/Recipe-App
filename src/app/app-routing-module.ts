@@ -16,7 +16,7 @@ const appRoutes: Routes =[
         { path: ':id/edit', component: RecipeEditComponent }
     ] },
     { path: 'shopping-list', component: ShoppingListComponent }
-  
+
 ];
 
 @NgModule({
