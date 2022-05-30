@@ -1,37 +1,48 @@
-import { RecipeService } from './../recipes/recipes.service';
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { map, tap, take, exhaustMap } from 'rxjs/operators';
+
 import { Recipe } from '../recipes/recipe.model';
-import { map } from 'rxjs/operators';
-import { tap } from 'rxjs/operators';
+import { RecipeService } from '../recipes/recipes.service';
+import { AuthService } from '../auth/auth.service';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class DataStorageService {
-
-  constructor(private http: HttpClient, private recipeService: RecipeService) {}
+  constructor(
+    private http: HttpClient,
+    private recipeService: RecipeService,
+    private authService: AuthService
+  ) {}
 
   storeRecipes() {
     const recipes = this.recipeService.getRecipes();
-    this.http.put('https://ng-recipe-app-ed60b-default-rtdb.firebaseio.com/recipes.json', recipes).subscribe(response => {
-      console.log(response);
-    });
+    this.http
+      .put(
+        'https://ng-recipe-app-ed60b-default-rtdb.firebaseio.com/recipes.json',
+        recipes
+      )
+      .subscribe(response => {
+        console.log(response);
+      });
   }
 
   fetchRecipes() {
     return this.http
-    .get<Recipe[]>(
-      'https://ng-recipe-app-ed60b-default-rtdb.firebaseio.com/recipes.json'
-    )
-    .pipe(
-      map(recipes => { // RXJS Operator
-        return recipes.map(recipe => { // JS Array Method
-          return {...recipe, ingredients: recipe.ingredients ? recipe.ingredients : []
-          }; // '...' = spread operator used to copy all properties/data of 'Recipe'
-       });
-      }),
-      tap(recipes => {
-        this.recipeService.setRecipes(recipes);
-      })
-    )
+      .get<Recipe[]>(
+        'https://ng-recipe-app-ed60b-default-rtdb.firebaseio.com/recipes.json'
+      )
+      .pipe(
+        map(recipes => {
+          return recipes.map(recipe => {
+            return {
+              ...recipe,
+              ingredients: recipe.ingredients ? recipe.ingredients : []
+            };
+          });
+        }),
+        tap(recipes => {
+          this.recipeService.setRecipes(recipes);
+        })
+      );
   }
 }
