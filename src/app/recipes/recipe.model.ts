@@ -1,4 +1,3 @@
-import { Url } from "url";
 import { Ingredient } from "../shared/ingredient.model";
 
 export class Recipe {

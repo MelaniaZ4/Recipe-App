@@ -4,11 +4,7 @@ import * as ShoppingListActions from './shopping-list.actions';
 export interface State {
   ingredients: Ingredient[];
   editedIngredient: Ingredient;
-  editedIngredientIndex: number
-}
-
-export interface AppState {
-  shoppingList: State;
+  editedIngredientIndex: number;
 }
 
 const initialState: State = {
@@ -35,17 +31,19 @@ export function shoppingListReducer(
           ingredients: [...state.ingredients, ...action.payload]
       };
       case ShoppingListActions.UPDATE_INGREDIENT:
-        const Ingredient = state.ingredients[action.payload.index];
+        const Ingredient = state.ingredients[state.editedIngredientIndex];
         const updatedIngredient = {
           ...Ingredient,
-          ...action.payload.ingredient
+          ...action.payload
         };
         const updatedIngredients = [...state.ingredients];
-        updatedIngredients[action.payload.index] = updatedIngredient;
+        updatedIngredients[state.editedIngredientIndex] = updatedIngredient;
 
         return {
           ...state,
-          ingredients: updatedIngredients
+          ingredients: updatedIngredients,
+          editedIngredientIndex: -1,
+          editedIngredient: null
       };
       case ShoppingListActions.DELETE_INGREDIENT:
 
@@ -53,9 +51,25 @@ export function shoppingListReducer(
         return {
           ...state,
           ingredients: state.ingredients.filter((ingredient, ingredientIndex) => {
-            return ingredientIndex !== action.payload;
-          })
+            return ingredientIndex !== state.editedIngredientIndex;
+          }),
+
+          editedIngredientIndex: -1,
+          editedIngredient: null
       };
+      case ShoppingListActions.START_EDIT:
+        return {
+          ...state,
+          editedIngredientIndex: action.payload,
+          editedIngredient: { ...state.ingredients[action.payload] }
+        };
+
+      case ShoppingListActions.STOP_EDIT:
+        return {
+          ...state, // copy the existing state
+          editedIngredientIndex: -1,  // set both properties to their iniial values
+          editedIngredient: null
+        };
       default:
       return state;
   }

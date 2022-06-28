@@ -3,14 +3,14 @@
         <button class="btn btn-success" (click)="onNewRecipe()">Add Recipe</button>
     </div>
 </div>
-<hr>	
+<hr>
 <div class="row">
     <div class="col-xs-12">
         <!-- Recpliacte app-recipe-item component for each recipe using ngFor loop -->
         <!-- Listening to (recipeSelected) event and pass the data 'which recipe was selected' through recipeEl-->
-        <app-recipe-item 
+        <app-recipe-item
         *ngFor="let recipeEl of recipes, let i = index"
         [recipe]="recipeEl"
-        [index]="i"></app-recipe-item> 
+        [index]="i"></app-recipe-item>
     </div>
 </div>
