@@ -6,25 +6,22 @@ import { LoadingSpinnerComponent } from "./loading-spinner/loading-spinner-compo
 import { CommonModule } from '@angular/common';
 
 @NgModule({
-  declarations: [
-    AlertComponent,
-    LoadingSpinnerComponent,
-    PlaceholderDirective,
-    DropdownDirective
-  ],
-  imports: [
-    CommonModule
-  ],
-  exports: [
-    AlertComponent,
-    LoadingSpinnerComponent,
-    PlaceholderDirective,
-    DropdownDirective,
-    CommonModule
-  ],
-  entryComponents: [
-    AlertComponent
-  ]
+    declarations: [
+        AlertComponent,
+        LoadingSpinnerComponent,
+        PlaceholderDirective,
+        DropdownDirective
+    ],
+    imports: [
+        CommonModule
+    ],
+    exports: [
+        AlertComponent,
+        LoadingSpinnerComponent,
+        PlaceholderDirective,
+        DropdownDirective,
+        CommonModule
+    ]
 })
 
 export class SharedModule {
