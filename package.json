@@ -10,6 +10,7 @@
   },
   "private": true,
   "dependencies": {
+<<<<<<< HEAD
     "@angular/animations": "~13.3.11",
     "@angular/common": "~13.3.11",
     "@angular/compiler": "~13.3.11",
@@ -19,6 +20,16 @@
     "@angular/platform-browser-dynamic": "~13.3.11",
     "@angular/router": "~13.3.11",
     "@ngrx/effects": "^14.0.0",
+=======
+    "@angular/animations": "~12.2.0",
+    "@angular/common": "~12.2.0",
+    "@angular/compiler": "~12.2.0",
+    "@angular/core": "~12.2.0",
+    "@angular/forms": "~12.2.0",
+    "@angular/platform-browser": "~12.2.0",
+    "@angular/platform-browser-dynamic": "~12.2.0",
+    "@angular/router": "~12.2.0",
+>>>>>>> parent of e5011c5 (Move Service logic to ngrx)
     "@ngrx/store": "^13.2.0",
     "bootstrap": "^3.4.1",
     "rxjs": "~6.6.0",
