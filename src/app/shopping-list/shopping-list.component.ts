@@ -2,9 +2,9 @@ import { LoggingService } from './../logging.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { Ingredient } from '../shared/ingredient.model';
+import { ShoppingListService } from './shoppinglist.service';
 import { Store } from '@ngrx/store';
-import * as fromApp from '../store/app.reducer';
-import * as ShoppingListActions from './store/shopping-list.actions'
+import * as fromShoppingList from './store/shopping-list.reducer'
 
 @Component({
   selector: 'app-shopping-list',
@@ -16,8 +16,9 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
     private subscription: Subscription;
 
   constructor(
+    private shoppingListService: ShoppingListService,
     private loggingService: LoggingService,
-    private store: Store<fromApp.AppState>
+    private store: Store<fromShoppingList.AppState>
     ) { }
 
   ngOnInit(): void {
@@ -35,14 +36,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   }
 
   onEditItem(index: number) {
-    //instead of using the shoppinglist service....
-    // this.shoppingListService.startedEditing.next(index);
-
-    //...we are now using the store and dispatch a new action from SL Actions
-    this.store.dispatch(new ShoppingListActions.StartEdit(index));
-    // access all actions through store, create(dispatch) new action based on
-    //start edit class which takes the index as an argument
-
+    this.shoppingListService.startedEditing.next(index);
   }
 
   ngOnDestroy(): void {
